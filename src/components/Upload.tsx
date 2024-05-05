@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 import Papa from "papaparse";
 import { Label } from "./ui/label";
@@ -24,7 +24,17 @@ type TRecord = {
 };
 
 export default function Upload() {
+  const [uploadData, setUploadData] = useState<TRecord[]>([]);
   const addRecord = useRecordStore((state) => state.addRecord);
+
+  const onSend = async () => {
+    if (uploadData.length === 0) return alert("No data to send");
+    await addRecord(uploadData);
+    setUploadData([]);
+  };
+  const onCancel = () => {
+    setUploadData([]);
+  };
 
   const onFileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const csvfile: any = event?.target?.files?.[0];
@@ -35,27 +45,21 @@ export default function Upload() {
       dynamicTyping: true,
       complete: async function (results) {
         console.log("finished:", results.data);
-        await addRecord(results.data);
+        setUploadData(results.data);
       },
     });
   };
-  return (
+  return uploadData.length > 0 ? (
+    <div className="grid w-full max-w-sm items-center gap-1.5">
+      <Button onClick={onSend}>Send</Button>
+      <Button variant="destructive" onClick={onCancel}>
+        Cancel
+      </Button>
+    </div>
+  ) : (
     <div className="grid w-full max-w-sm items-center gap-1.5">
       <Label htmlFor="upload">Upload</Label>
       <Input id="upload" type="file" onChange={onFileChangeHandler} />
     </div>
-
-    // <Button>
-    //   <label htmlFor="csvFileSelector" className="">
-    //     Upload
-    //   </label>
-    //   <input
-    //     type="file"
-    //     id="csvFileSelector"
-    //     // accept={acceptableCSVFileTypes}
-    //     className="hidden"
-    //     onChange={onFileChangeHandler}
-    //   />
-    // </Button>
   );
 }
