@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Table,
@@ -8,11 +9,16 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { useRecordStore } from "@/store";
 
 export default function TableRecord() {
+  const isLoading = useRecordStore((state) => state.isLoading);
+  const records = useRecordStore((state) => state.records);
   return (
     <Table>
-      <TableCaption>A list of your recent uploads.</TableCaption>
+      <TableCaption>
+        A list of your recent uploads. {isLoading && "loading"}
+      </TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">Invoice</TableHead>
