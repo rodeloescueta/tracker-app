@@ -1,9 +1,5 @@
 import { Metadata } from "next";
-import Image from "next/image";
-
-import { Button } from "@/components/ui/button";
-
-import DashboardTabs from "@/components/DashboardTabs";
+import { currentUser } from "@clerk/nextjs/server";
 import Upload from "@/components/Upload";
 
 export const metadata: Metadata = {
@@ -11,26 +7,20 @@ export const metadata: Metadata = {
   description: "Example dashboard app built using the components.",
 };
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const user = await currentUser();
   return (
-    <>
-      <div className="flex-col md:flex">
-        <div className="border-b">
-          <div className="flex h-16 items-center px-4">
-            <div className="mx-6">TeamIcon</div>
-            <div className="ml-auto flex items-center space-x-4">Search</div>
+    <div className="px-2 md:px-6">
+      {user && (
+        <div className="flex items-center justify-between space-y-2">
+          <h2 className="text-3xl font-bold tracking-tight hidden md:block">
+            Dashboard
+          </h2>
+          <div className="flex items-center space-x-2">
+            <Upload />
           </div>
         </div>
-        <div className="flex-1 space-y-4 p-8 pt-6">
-          <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-            <div className="flex items-center space-x-2">
-              <Upload />
-            </div>
-          </div>
-          <DashboardTabs />
-        </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 }
