@@ -21,7 +21,7 @@ export default async function Articles({}) {
       <div className="flex flex-wrap justify-end pt-4">
         <Button disabled>Create Article</Button>
       </div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-10">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-10 px-4">
         {posts.map((post: Post) => {
           return <ArticleCard key={post.id} {...post} />;
         })}
