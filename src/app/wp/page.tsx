@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 const reqUrl = "http://testdomain123533.xyz/wp-json/wp/v2";
 
 export default async function WordpressConnect() {
@@ -11,7 +11,11 @@ export default async function WordpressConnect() {
 
   return (
     <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-1">
-      <Card>{JSON.stringify(data, null, 0)}</Card>
+      <Card className=" pt-4">
+        <CardContent>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </CardContent>
+      </Card>
     </div>
   );
 }
