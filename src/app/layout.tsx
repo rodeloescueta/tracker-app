@@ -31,11 +31,13 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {/* <Header /> */}
-
-            {/* <SidebarMenu /> */}
-            <Sidebar />
-            <main className="w-full h-full">{children}</main>
+            <div className="hidden lg:flex min-w-[300px] min-h-screen">
+              <Sidebar />
+            </div>
+            <main className="w-full h-full">
+              <Header />
+              {children}
+            </main>
           </ThemeProvider>
         </body>
       </html>
