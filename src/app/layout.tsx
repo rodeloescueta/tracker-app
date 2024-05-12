@@ -4,6 +4,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
+import SidebarMenu from "@/components/SidebarMenu";
+import Sidebar from "@/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,14 +24,17 @@ export default function RootLayout({
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       <html lang="en">
-        <body className="">
+        <body className={`${inter.className} flex items-start jsutify-between`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            <Header />
+            {/* <Header /> */}
+
+            {/* <SidebarMenu /> */}
+            <Sidebar />
             <main className="w-full h-full">{children}</main>
           </ThemeProvider>
         </body>
