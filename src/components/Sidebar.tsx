@@ -46,10 +46,12 @@ export default function Sidebar() {
                   List
                 </CommandItem>
               </Link>
-              <CommandItem className="flex gap-4 py-4">
-                <BookCheck />
-                Publish
-              </CommandItem>
+              <Link href="/editor">
+                <CommandItem className="flex gap-4 py-4">
+                  <BookCheck />
+                  Publish
+                </CommandItem>
+              </Link>
             </CommandGroup>
           </CommandList>
         </Command>

@@ -1,20 +1,23 @@
 import ArticleCard from "@/components/ArticleCard";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-async function getPosts() {
-  const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
-  return res.data.slice(0, 10);
+async function getArticles() {
+  const res = await axios.get("http://165.227.110.109:5555/articles");
+  console.log("++++++++++res", res.data);
+  return res.data.articles;
 }
 
-type Post = {
-  userId: number;
-  id: number;
+type Article = {
+  article_id: string;
   title: string;
-  body: string;
+  content: string;
+  topic: string;
+  strategy_name: string;
+  created_at: string;
 };
 
 export default async function Articles({}) {
-  const posts = await getPosts();
+  const articles = await getArticles();
 
   return (
     <>
@@ -22,8 +25,8 @@ export default async function Articles({}) {
         <Button disabled>Create Article</Button>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-10 px-4">
-        {posts.map((post: Post) => {
-          return <ArticleCard key={post.id} {...post} />;
+        {articles.map((article: Article) => {
+          return <ArticleCard key={article.article_id} {...article} />;
         })}
       </div>
     </>

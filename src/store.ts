@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import axios from "axios";
 
 type TRecord = {
   keyword: string;
@@ -28,6 +29,7 @@ export const useRecordStore = create<RecordStore>((set) => ({
   addRecord: async (data) => {
     set(() => ({ isLoading: true }));
     await new Promise((resolve) => setTimeout(resolve, 1000)); // simulate delay
+    await axios.post('')
     set((s) => ({ records: [...s.records, ...data] }));
     console.log("send to API", data);
     set(() => ({ isLoading: false }));

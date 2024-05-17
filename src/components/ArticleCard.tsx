@@ -1,4 +1,5 @@
 import React from "react";
+import DOMPurify from "isomorphic-dompurify";
 import {
   Card,
   CardContent,
@@ -9,36 +10,40 @@ import {
 } from "./ui/card";
 import Link from "next/link";
 
-type Post = {
-  userId: number;
-  id: number;
+type Article = {
+  article_id: string;
   title: string;
-  body: string;
+  content: string;
+  topic: string;
+  strategy_name: string;
+  created_at: string;
 };
 
-export default function ArticleCard(post: Post) {
+export default function ArticleCard(article: Article) {
   return (
     <div className="rounded-lg">
       <Link
         href={{
-          pathname: `/article/${post.id}`,
+          pathname: `/article/${article.article_id}`,
           query: {
-            id: post.id,
-            title: post.title,
+            id: article.article_id,
+            // title: article.title,
           },
         }}
       >
         <Card className="h-80">
           <CardHeader>
-            <CardTitle>{post.title}</CardTitle>
-            <CardDescription>Sub title</CardDescription>
+            <CardTitle>{article.topic}</CardTitle>
+            <CardDescription>{article.title}</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>{post.body}</p>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(article.content),
+              }}
+            />
           </CardContent>
-          <CardFooter>
-            <div>December 24, 2023</div>
-          </CardFooter>
+          <CardFooter>{article.created_at}</CardFooter>
         </Card>
       </Link>
     </div>

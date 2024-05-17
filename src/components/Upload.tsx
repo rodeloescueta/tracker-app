@@ -5,7 +5,7 @@ import Papa from "papaparse";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useRecordStore } from "@/store";
-
+import axios from "axios";
 // const acceptableCSVFileTypes: string =
 //   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, csv";
 
@@ -23,12 +23,20 @@ type TRecord = {
   ai_model: string;
 };
 
-export default function Upload() {
+interface Props {
+  email: string;
+}
+
+export default function Upload(props: Props) {
   const [uploadData, setUploadData] = useState<TRecord[]>([]);
   const addRecord = useRecordStore((state) => state.addRecord);
 
   const onSend = async () => {
     if (uploadData.length === 0) return alert("No data to send");
+    const res = await axios.post(
+      "http://165.227.110.109:5555/process",
+      uploadData
+    );
     await addRecord(uploadData);
     setUploadData([]);
   };
