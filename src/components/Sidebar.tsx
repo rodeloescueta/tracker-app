@@ -1,4 +1,13 @@
 "use client";
+import { BookCheck, Bot, Cable, Newspaper, User } from "lucide-react";
+import { usePathname } from "next/navigation";
+import {
+  RedirectToSignIn,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
 import {
   Command,
   CommandDialog,
@@ -13,26 +22,34 @@ import {
 
 import Title from "./Title";
 import Link from "next/link";
-import { BookCheck, Bot, Cable, Newspaper, User } from "lucide-react";
+
 import { ModeToggle } from "./mode-toggle";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export default function Sidebar() {
+  const pathname = usePathname();
   return (
     <div className="fixed flex flex-col gap-4 w-[300px] min-w-[300px] p-4 min-h-screen">
       <Title />
       <div className="grow">
-        <Command>
-          <CommandList style={{ overflow: "visible" }}>
+        <Command className="rounded-lg border shadow-md">
+          <CommandList>
             <CommandGroup heading="Tools">
-              <Link href="/">
-                <CommandItem className="flex gap-4 py-4">
+              <Link href="/" className=" ">
+                <CommandItem
+                  className={`flex gap-4 py-4 ${
+                    pathname === "/" ? "!bg-primary" : ""
+                  }`}
+                >
                   <Bot />
                   SEO AI
                 </CommandItem>
               </Link>
               <Link href="/wp">
-                <CommandItem className="flex gap-4 py-4">
+                <CommandItem
+                  className={`flex gap-4 py-4 ${
+                    pathname.includes("/wp") ? "!bg-primary" : ""
+                  }`}
+                >
                   <Cable />
                   Wordpress API
                 </CommandItem>
@@ -41,13 +58,21 @@ export default function Sidebar() {
             <CommandSeparator />
             <CommandGroup heading="Article">
               <Link href="/article">
-                <CommandItem className="flex gap-4 py-4">
+                <CommandItem
+                  className={`flex gap-4 py-4 ${
+                    pathname.includes("/article") ? "!bg-primary" : ""
+                  }`}
+                >
                   <Newspaper />
                   List
                 </CommandItem>
               </Link>
               <Link href="/editor">
-                <CommandItem className="flex gap-4 py-4">
+                <CommandItem
+                  className={`flex gap-4 py-4 ${
+                    pathname.includes("/editor") ? "!bg-primary" : ""
+                  }`}
+                >
                   <BookCheck />
                   Publish
                 </CommandItem>
@@ -59,7 +84,8 @@ export default function Sidebar() {
       <div className="flex items-center space-x-4 mx-2">
         <ModeToggle />
         <SignedOut>
-          <SignInButton />
+          {/* <SignInButton /> */}
+          <RedirectToSignIn />
         </SignedOut>
         <SignedIn>
           <UserButton />

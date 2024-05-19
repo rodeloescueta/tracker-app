@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { dark, neobrutalism } from "@clerk/themes";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
-import SidebarMenu from "@/components/SidebarMenu";
+// import SidebarMenu from "@/components/SidebarMenu";
 import Sidebar from "@/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,6 +23,10 @@ export default function RootLayout({
   return (
     <ClerkProvider
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      appearance={{
+        baseTheme: dark,
+        signIn: { baseTheme: neobrutalism },
+      }}
     >
       <html lang="en">
         <body className={`${inter.className} flex items-start jsutify-between`}>
