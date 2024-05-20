@@ -1,83 +1,55 @@
 import { Avatar } from "@/components/ui/avatar";
-import { CardHeader, CardContent, Card } from "@/components/ui/card";
+import {
+  CardHeader,
+  CardContent,
+  Card,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import ExamplImage from "../../../../public/example.svg";
+import axios from "axios";
+import { format } from "date-fns";
+import DOMPurify from "isomorphic-dompurify";
+// import { useRouter } from "next/navigation";
 
-export default function Articles({
-  searchParams,
-}: {
-  searchParams: {
-    id: string;
-    title: string;
-  };
-}) {
+async function getArticle(article_id: string) {
+  const res = await axios.get(
+    `http://165.227.110.109:5555/article/${article_id}`
+  );
+  console.log("+++++++++++res.data", res.data);
+  return res.data;
+}
+
+export default async function Articles({ params }: { params: { id: string } }) {
+  // const router = useRouter();
+  // const { article_id } = router.query;
+  const article = await getArticle(params.id);
+
   return (
-    <div>
-      <main className="py-6 px-4 md:px-6 lg:py-16 md:py-12">
-        <article className="py-4 text-center prose prose-gray mx-auto dark:prose-invert">
-          <div className="space-y-2 not-prose">
-            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl lg:leading-[3.5rem]">
-              {searchParams.title}
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400">
-              Posted on December 24, 2023
-            </p>
-          </div>
-          <p>
-            New York, the city that never sleeps. A city where dreams are made
-            and broken, where the hustle never stops.
-          </p>
-          <div className="flex justify-center">
-            <Image
-              alt="New York skyline"
-              src={ExamplImage}
-              width={500}
-              height={500}
-            />
-          </div>
-          <p>
-            From the towering skyscrapers of Manhattan to the hipster streets of
-            Brooklyn, every corner of New York has a story to tell.
-          </p>
-          <h2 className="mt-4">Comments</h2>
-        </article>
-        <Card>
-          <CardHeader>
-            <Avatar className="mr-2" />
-            <h3 className="text-lg font-bold">John Doe</h3>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-700">
-              I love New York! Thanks for sharing this.
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="mt-4">
-          <CardHeader>
-            <Avatar className="mr-2" />
-            <h3 className="text-lg font-bold">Jane Smith</h3>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-700">
-              Great post! Makes me want to visit New York again.
-            </p>
-          </CardContent>
-        </Card>
-        <div className="mt-6">
-          <Label htmlFor="comment">Leave a comment</Label>
-          <Textarea
-            className="mt-2 text-gray-700 w-full h-20"
-            id="comment"
-            placeholder="Your comment here..."
+    <article className="p-4 mx-auto">
+      <div className="space-y-2 text-center  not-prose py-4">
+        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl lg:leading-[3.5rem] capitalize">
+          {article.topic}
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400">
+          {format(article.created_at, "PP")}
+        </p>
+      </div>
+      <Card className="h-full">
+        <CardContent className="p-4 dark:bg-dot-white/[0.1] bg-dot-black/[0.1]">
+          <div className="relative pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(article.content),
+            }}
           />
-          <Button className="mt-4" variant="default">
-            Submit
-          </Button>
-        </div>
-      </main>
-    </div>
+        </CardContent>
+      </Card>
+    </article>
   );
 }

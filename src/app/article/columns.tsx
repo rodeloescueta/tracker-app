@@ -2,22 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  ExternalLink,
-  Eye,
-  MoreHorizontal,
-  Pencil,
-  Trash,
-} from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { ArrowUpDown, ExternalLink, Pencil, Trash } from "lucide-react";
 import Link from "next/link";
 
 export type Article = {

@@ -27,7 +27,6 @@ export default function ArticleCard(article: Article) {
           pathname: `/article/${article.article_id}`,
           query: {
             id: article.article_id,
-            // title: article.title,
           },
         }}
       >

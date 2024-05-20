@@ -44,16 +44,6 @@ export default function Sidebar() {
                   SEO AI
                 </CommandItem>
               </Link>
-              <Link href="/wp">
-                <CommandItem
-                  className={`flex gap-4 py-4 ${
-                    pathname.includes("/wp") ? "!bg-primary" : ""
-                  }`}
-                >
-                  <Cable />
-                  Wordpress API
-                </CommandItem>
-              </Link>
             </CommandGroup>
             <CommandSeparator />
             <CommandGroup heading="Article">
