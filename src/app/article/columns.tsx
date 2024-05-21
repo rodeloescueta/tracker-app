@@ -59,9 +59,6 @@ export const columns: ColumnDef<Article>[] = [
           <Link href={`/article/${row.getValue("article_id")}`}>
             <ExternalLink className="h-4 w-4 stroke-cyan-500" />
           </Link>
-
-          <Pencil className="h-4 w-4 stroke-blue-500" />
-          <Trash className="h-4 w-4 stroke-red-500" />
         </div>
       );
     },

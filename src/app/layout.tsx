@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
 // import SidebarMenu from "@/components/SidebarMenu";
 import Sidebar from "@/components/Sidebar";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +43,7 @@ export default function RootLayout({
             <main className="w-full h-full">
               <Header />
               {children}
+              <Toaster />
             </main>
           </ThemeProvider>
         </body>

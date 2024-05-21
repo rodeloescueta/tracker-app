@@ -58,16 +58,26 @@ export default function Upload(props: Props) {
     });
   };
   return uploadData.length > 0 ? (
-    <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Button onClick={onSend}>Send</Button>
-      <Button variant="destructive" onClick={onCancel}>
+    <div className="flex items-center w-fit rounded-full">
+      <div onClick={onSend} className="cursor-pointer px-4 py-2">
+        Send
+      </div>
+      |
+      <div onClick={onCancel} className="cursor-pointer px-4 py-2">
         Cancel
-      </Button>
+      </div>
     </div>
   ) : (
-    <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="upload">Upload</Label>
-      <Input id="upload" type="file" onChange={onFileChangeHandler} />
+    <div className="grid items-center">
+      <Label htmlFor="upload" className="px-4 py-3 cursor-pointer">
+        Choose File
+      </Label>
+      <Input
+        id="upload"
+        type="file"
+        onChange={onFileChangeHandler}
+        className="hidden"
+      />
     </div>
   );
 }

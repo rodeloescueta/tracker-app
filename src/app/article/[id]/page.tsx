@@ -15,6 +15,7 @@ import ExamplImage from "../../../../public/example.svg";
 import axios from "axios";
 import { format } from "date-fns";
 import DOMPurify from "isomorphic-dompurify";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 // import { useRouter } from "next/navigation";
 
 async function getArticle(article_id: string) {
@@ -40,16 +41,18 @@ export default async function Articles({ params }: { params: { id: string } }) {
           {format(article.created_at, "PP")}
         </p>
       </div>
-      <Card className="h-full">
-        <CardContent className="p-4 dark:bg-dot-white/[0.1] bg-dot-black/[0.1]">
-          <div className="relative pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(article.content),
-            }}
-          />
-        </CardContent>
-      </Card>
+      <div className="h-full w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
+        <Card className="h-full">
+          <CardContent className="p-8 ">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(article.content),
+              }}
+            />
+          </CardContent>
+        </Card>
+        {/* <BackgroundBeams /> */}
+      </div>
     </article>
   );
 }
