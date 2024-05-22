@@ -1,16 +1,13 @@
 "use client";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { useEffect } from "react";
 
 const LogMessage = () => {
-  const { toast } = useToast();
-
   useEffect(() => {
-    const eventSource = new EventSource("http://localhost:5555/logs");
+    const eventSource = new EventSource("http://165.227.110.109:5555/logs");
     eventSource.onmessage = function (event) {
       console.log(event.data);
-      toast({
-        title: "Backend log:",
+      toast("Log from backend", {
         description: event.data,
       });
     };

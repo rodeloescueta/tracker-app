@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
 // import SidebarMenu from "@/components/SidebarMenu";
 import Sidebar from "@/components/Sidebar";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
