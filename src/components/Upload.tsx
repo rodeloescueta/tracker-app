@@ -6,8 +6,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useRecordStore } from "@/store";
 import axios from "axios";
-// const acceptableCSVFileTypes: string =
-//   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, csv";
+import { toast } from "sonner";
 
 type TRecord = {
   keyword: string;
@@ -38,6 +37,11 @@ export default function Upload(props: Props) {
       uploadData
     );
     await addRecord(uploadData);
+    if (res?.status === 200) {
+      toast("File sent!", {
+        description: res?.data?.message,
+      });
+    }
     setUploadData([]);
   };
   const onCancel = () => {

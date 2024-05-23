@@ -5,19 +5,14 @@ import {
   RedirectToSignIn,
   SignedIn,
   SignedOut,
-  SignInButton,
   UserButton,
 } from "@clerk/nextjs";
 import {
   Command,
-  CommandDialog,
-  CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 
 import Title from "./Title";
@@ -34,7 +29,7 @@ export default function Sidebar() {
         <Command className="rounded-lg border shadow-md">
           <CommandList>
             <CommandGroup heading="Tools">
-              <Link href="/" className=" ">
+              <Link href="/" className="pointer-events-none" aria-disabled>
                 <CommandItem
                   className={`flex gap-4 py-4 ${
                     pathname === "/" ? "!bg-primary" : ""
@@ -49,7 +44,7 @@ export default function Sidebar() {
             <CommandGroup heading="Article">
               <Link href="/article">
                 <CommandItem
-                  className={`flex gap-4 py-4 ${
+                  className={`flex gap-4 py-4 cursor-pointer ${
                     pathname.includes("/article") ? "!bg-primary" : ""
                   }`}
                 >
@@ -57,7 +52,11 @@ export default function Sidebar() {
                   List
                 </CommandItem>
               </Link>
-              <Link href="/editor">
+              <Link
+                href="/editor"
+                className="pointer-events-none"
+                aria-disabled
+              >
                 <CommandItem
                   className={`flex gap-4 py-4 ${
                     pathname.includes("/editor") ? "!bg-primary" : ""
@@ -74,7 +73,6 @@ export default function Sidebar() {
       <div className="flex items-center space-x-4 mx-2">
         <ModeToggle />
         <SignedOut>
-          {/* <SignInButton /> */}
           <RedirectToSignIn />
         </SignedOut>
         <SignedIn>
