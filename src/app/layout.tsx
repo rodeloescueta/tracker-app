@@ -29,7 +29,7 @@ export default function RootLayout({
         signIn: { baseTheme: neobrutalism },
       }}
     >
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={`${inter.className} flex items-start jsutify-between`}>
           <ThemeProvider
             attribute="class"

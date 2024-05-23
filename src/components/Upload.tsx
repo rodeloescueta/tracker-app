@@ -33,7 +33,7 @@ export default function Upload(props: Props) {
   const onSend = async () => {
     if (uploadData.length === 0) return alert("No data to send");
     const res = await axios.post(
-      "http://165.227.110.109:5555/process",
+      `${process.env.TOOL_BASE_URL}/process`,
       uploadData
     );
     await addRecord(uploadData);

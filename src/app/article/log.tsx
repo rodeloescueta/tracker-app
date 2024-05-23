@@ -4,7 +4,9 @@ import { useEffect } from "react";
 
 const LogMessage = () => {
   useEffect(() => {
-    const eventSource = new EventSource("http://165.227.110.109:5555/logs");
+    const eventSource = new EventSource(
+      `${process.env.NEXT_PUBLIC_TOOL_BASE_URL}/logs`
+    );
     eventSource.onmessage = function (event) {
       console.log(event.data);
       toast("Log from backend", {

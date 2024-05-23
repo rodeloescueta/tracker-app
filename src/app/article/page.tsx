@@ -5,7 +5,7 @@ import axios from "axios";
 import { DataTable } from "./data-table";
 import LogMessage from "./log";
 async function getArticles() {
-  const res = await axios.get("http://165.227.110.109:5555/articles");
+  const res = await axios.get(`${process.env.TOOL_BASE_URL}/articles`);
   return res.data.articles;
 }
 
