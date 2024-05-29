@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  nextapp:
+    container_name: nextapp
+    image: rodeloescueta/nexttool
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules

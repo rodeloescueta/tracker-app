@@ -2,12 +2,6 @@
 import { BookCheck, Bot, Cable, Newspaper, User } from "lucide-react";
 import { usePathname } from "next/navigation";
 import {
-  RedirectToSignIn,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
-import {
   Command,
   CommandGroup,
   CommandItem,
@@ -54,8 +48,8 @@ export default function Sidebar() {
               </Link>
               <Link
                 href="/editor"
-                className="pointer-events-none"
-                aria-disabled
+                // className="pointer-events-none"
+                // aria-disabled
               >
                 <CommandItem
                   className={`flex gap-4 py-4 ${
@@ -72,12 +66,6 @@ export default function Sidebar() {
       </div>
       <div className="flex items-center space-x-4 mx-2">
         <ModeToggle />
-        <SignedOut>
-          <RedirectToSignIn />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
       </div>
     </div>
   );

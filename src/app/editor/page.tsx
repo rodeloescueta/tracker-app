@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import Tiptap from "@/components/Tiptap";
+import axios from "axios";
 
 export default function Editor() {
   const formSchema = z.object({
@@ -36,8 +37,27 @@ export default function Editor() {
     console.log("+++++values", values);
   };
 
+  const jsonData = [
+    {
+      urls: "https://www.parkerandsons.com/tucson/cooling/ac-repair",
+      url_topic: "ac repair",
+      scraped: "",
+      to_scrape: "x",
+    },
+  ] as const;
+
+  const onSend = async () => {
+    console.log("+++++onsend");
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_TOOL_BASE_URL}/process-url`,
+      jsonData
+    );
+    console.log("++++++++res", res);
+  };
+
   return (
     <>
+      <Button onClick={onSend}>test</Button>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField

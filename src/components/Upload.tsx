@@ -22,18 +22,14 @@ type TRecord = {
   ai_model: string;
 };
 
-interface Props {
-  email: string;
-}
-
-export default function Upload(props: Props) {
+export default function Upload() {
   const [uploadData, setUploadData] = useState<TRecord[]>([]);
   const addRecord = useRecordStore((state) => state.addRecord);
 
   const onSend = async () => {
     if (uploadData.length === 0) return alert("No data to send");
     const res = await axios.post(
-      `${process.env.TOOL_BASE_URL}/process`,
+      `${process.env.NEXT_PUBLIC_TOOL_BASE_URL}/process`,
       uploadData
     );
     await addRecord(uploadData);
