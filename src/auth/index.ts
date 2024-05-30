@@ -14,16 +14,16 @@ const authOptions: NextAuthConfig = {
         const users = [
           {
             id: "1f2e4d1c-b79b-4c1e-a3e7-97e2c1e4f654",
-            userName: "johndoe",
-            name: "John Doe",
-            password: "pass1234",
+            userName: "thierry",
+            name: "Thierry",
+            password: process.env.ADMIN_USER_PASSWORD,
             email: "johndoe@example.com",
           },
           {
             id: "3a5e4c9b-82c9-4f4d-a3a8-57e2b1c3d234",
-            userName: "janesmith",
-            name: "Jane Smith",
-            password: "securePass!567",
+            userName: "delo",
+            name: "Rodelo Escueta",
+            password: process.env.DEV_USER_PASSWORD,
             email: "janesmith@example.com",
           },
         ];
