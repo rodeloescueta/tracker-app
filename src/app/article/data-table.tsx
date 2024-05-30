@@ -83,7 +83,7 @@ export function DataTable<TData, TValue>({
             as="button"
             className="dark:bg-black bg-white text-black dark:text-white flex "
           >
-            <Upload email="testemail@gmail.com" />
+            <Upload />
           </HoverBorderGradient>
 
           <DropdownMenu>

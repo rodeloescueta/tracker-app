@@ -23,14 +23,14 @@ export default function Sidebar() {
         <Command className="rounded-lg border shadow-md">
           <CommandList>
             <CommandGroup heading="Tools">
-              <Link href="/" className="pointer-events-none" aria-disabled>
+              <Link href="/">
                 <CommandItem
                   className={`flex gap-4 py-4 ${
                     pathname === "/" ? "!bg-primary" : ""
                   }`}
                 >
                   <Bot />
-                  SEO AI
+                  Scraper
                 </CommandItem>
               </Link>
             </CommandGroup>
