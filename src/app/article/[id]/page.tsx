@@ -49,7 +49,7 @@ export default async function Articles({ params }: { params: { id: string } }) {
             />
           </CardContent>
         </Card>
-        <BackgroundBeams />
+        {/* <BackgroundBeams /> */}
       </div>
     </div>
   );
