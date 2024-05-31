@@ -22,17 +22,14 @@ async function getArticle(article_id: string) {
   const res = await axios.get(
     `http://165.227.110.109:5555/article/${article_id}`
   );
-  console.log("+++++++++++res.data", res.data);
   return res.data;
 }
 
 export default async function Articles({ params }: { params: { id: string } }) {
-  // const router = useRouter();
-  // const { article_id } = router.query;
   const article = await getArticle(params.id);
 
   return (
-    <article className="p-4 mx-auto">
+    <div className="p-4 mx-auto">
       <div className="space-y-2 text-center  not-prose py-4">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl lg:leading-[3.5rem] capitalize">
           {article.topic}
@@ -41,18 +38,19 @@ export default async function Articles({ params }: { params: { id: string } }) {
           {format(article.created_at, "PP")}
         </p>
       </div>
-      <div className="h-full w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
-        <Card className="h-full">
+      <div className="h-full w-full rounded-md relative flex flex-col items-center justify-center antialiased">
+        <Card className="h-full bg-neutral-100">
           <CardContent className="p-8 ">
             <div
+              className="prose"
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(article.content),
               }}
             />
           </CardContent>
         </Card>
-        {/* <BackgroundBeams /> */}
+        <BackgroundBeams />
       </div>
-    </article>
+    </div>
   );
 }
