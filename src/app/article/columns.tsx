@@ -49,11 +49,8 @@ export const columns: ColumnDef<Article>[] = [
   },
   {
     accessorKey: "article_id",
-    // id: "actions",
     header: "Action",
     cell: ({ row }) => {
-      // console.log("+++++row", row);
-      // console.log("+++++", row.getValue("article_id"));
       return (
         <div className="flex gap-2">
           <Link href={`/article/${row.getValue("article_id")}`}>

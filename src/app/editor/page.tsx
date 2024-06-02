@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+// import dynamic from "next/dynamic";
 import {
   Form,
   FormControl,
@@ -15,8 +16,9 @@ import * as z from "zod";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import Tiptap from "@/components/Tiptap";
 import axios from "axios";
+
+// const Editor = dynamic(() => import("../../components/editor"), { ssr: false });
 
 export default function Editor() {
   const formSchema = z.object({
@@ -47,12 +49,10 @@ export default function Editor() {
   ] as const;
 
   const onSend = async () => {
-    console.log("+++++onsend");
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_TOOL_BASE_URL}/process-url`,
       jsonData
     );
-    console.log("++++++++res", res);
   };
 
   return (
@@ -81,7 +81,8 @@ export default function Editor() {
               <FormItem>
                 <FormLabel>Content</FormLabel>
                 <FormControl>
-                  <Tiptap content={field.value} onChange={field.onChange} />
+                  {/* <Tiptap content={field.value} onChange={field.onChange} /> */}
+                  {/* <TiptapFull content={field.value} onChange={field.onChange}/> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
